@@ -9,7 +9,7 @@ include 'header.php';
 ?>
 
 <body>
-<center><h2>Fuel Ditribution Login</h2></center>
+<center><h2>Fuel Distribution Login</h2></center>
 
 
 <?php if(isset($_SESSION['messages'])): ?>
