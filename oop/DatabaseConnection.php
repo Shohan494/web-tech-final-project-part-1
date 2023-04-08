@@ -23,10 +23,5 @@ class DatabaseConnection {
   }
 }
 
-// Usage:
-$db = new DatabaseConnection();
-$conn = $db->getConnection();
-
-// Perform queries using $conn
 
 

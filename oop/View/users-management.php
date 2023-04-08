@@ -1,8 +1,5 @@
 <?php
 
-session_start();
-
-include 'connect.php';
 
 // check if user is authorized to access this page (e.g. check user role)
 if($_SESSION['logged_in_user']['role'] !== 'admin') {

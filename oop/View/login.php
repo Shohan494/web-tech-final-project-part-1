@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <body>
     <center><h2>Fuel Distribution Login</h2></center>
 
@@ -9,7 +13,7 @@
     <?php endif; ?>
 
     <div align="center">
-        <form method="post" action="index.php">
+        <form method="post" action="../Controller/LoginController.php">
             <table>
                 <tr>
                     <td>
@@ -53,3 +57,5 @@
         <p>For Registration as Customer, Click <a href="registration.php">here</a>.</p>
 		<p>Forgot your password, try <a href="forgot-password.php">here</a>.</p>
 	</div>
+
+
