@@ -6,7 +6,7 @@
 
 ## Issues
 
-- [] username duplicaate works, but for email it doesn't
+- [ ] username duplicaate works, but for email it doesn't
 
 ## Table of Contents
 
