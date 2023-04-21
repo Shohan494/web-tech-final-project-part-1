@@ -62,8 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="product_name">Product Name:</label>
         <input type="text" id="product_name" name="product_name" required><br><br>
 
-        <label for="product_description">Product Description:</label>
-        <textarea id="product_description" name="product_description" required></textarea><br><br>
+        <!-- <label for="product_description">Product Description:</label>
+        <textarea id="product_description" name="product_description" required></textarea><br><br> -->
 
         <label for="product_price">Product Price:</label>
         <input type="number" step="0.01" min="0" id="product_price" name="product_price" required><br><br>
