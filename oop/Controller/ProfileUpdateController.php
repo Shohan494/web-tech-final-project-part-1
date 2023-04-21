@@ -20,6 +20,9 @@ if(isset($_POST['update_profile'])) {
 
         // PASS SESSION MESSAGE FOR USER UPDATE
 
+        $messages[] = "Profile Updated!";
+        $_SESSION['messages'] = $messages;
+
         header("Location: ../View/dashboard.php");
         exit;
       } else {

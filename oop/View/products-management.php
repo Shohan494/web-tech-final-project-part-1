@@ -85,7 +85,10 @@
 </head>
 <body>
 
+
+
 <?php
+
 session_start();
 
 include '../DatabaseConnection.php';
@@ -93,7 +96,6 @@ include '../DatabaseConnection.php';
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
-// check if user is authorized to access this page (e.g. check user role)
 if($_SESSION['logged_in_user']['role'] !== 'admin') {
   header("Location: unauthorized.php");
   exit;
@@ -101,37 +103,23 @@ if($_SESSION['logged_in_user']['role'] !== 'admin') {
 
 $user_email = $_SESSION['logged_in_user']['username'];
 
-// if role admin
-// customer, salesman crud
-
 $user_role = $_SESSION['logged_in_user']['role'];
 
-// retrieve user data from database
-// you would replace this with your own database code
-
-$sql = "SELECT * FROM users";
+$sql = "SELECT * FROM products";
 $result = mysqli_query($conn, $sql);
-$users = array();
+$products = array();
 if(mysqli_num_rows($result) > 0) {
   while($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
+    $products[] = $row;
   }
 }
 ?>
 
+<h1>Products Management</h1>
 
-<h1>Users Management</h1>
+<h2>[ WOULD BE BETTER TO ADD QUANTITY AND BASIC CALCULATION  FOR EACH ORDER ]</h2>
 
-<?php if(isset($_SESSION['messages'])): ?>
-      <?php foreach($_SESSION['messages'] as $message): ?>
-        <center><p><?php echo $message; ?></p></center>
-      <?php endforeach; ?>
-      <?php unset($_SESSION['messages']); ?>
-    <?php endif; ?>
-
-<a href="add-user-form.php">Add User</a>
-
-
+<a href="add-product-form.php">Add Product</a>
 
 <br>
 
@@ -140,28 +128,40 @@ if(mysqli_num_rows($result) > 0) {
     <tr>
       <th>ID</th>
       <th>Name</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Edit User
+      <th>Description</th>
+      <th>Price</th>
+      <th>Edit Product
       </th>
-      <th>Delete User</th>
+      <th>Delete Product</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach($users as $user): ?>
+    <?php foreach($products as $product): ?>
       <tr>
-        <td><?php echo $user['id']; ?></td>
-        <td><?php echo $user['username']; ?></td>
-        <td><?php echo $user['email']; ?></td>
-        <td><?php echo $user['role']; ?></td>
+        <td><?php echo $product['product_id']; ?></td>
+        <td><?php echo $product['name']; ?></td>
+        <td><?php echo $product['description']; ?></td>
+        <td><?php echo $product['price']; ?></td>
         <td>
-          <button><a href="edit-user.php?id=<?php echo $user['id']; ?>">Edit</a></button>
+          <button><a href="edit-product.php?id=<?php echo $product['product_id']; ?>">Edit</a></button>
         </td>
         <td>
-        <button><a href="delete-user.php?id=<?php echo $user['id']; ?>">Delete</a></button>
+          <button><a href="delete-product.php?id=<?php echo $product['product_id']; ?>">Delete</a></button>
         </td>
       </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
+
+
+
+
+
+
+
+    
+</body>
+</html>
+
+
 

@@ -85,7 +85,9 @@
 </head>
 <body>
 
+
 <?php
+
 session_start();
 
 include '../DatabaseConnection.php';
@@ -93,7 +95,7 @@ include '../DatabaseConnection.php';
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
-// check if user is authorized to access this page (e.g. check user role)
+
 if($_SESSION['logged_in_user']['role'] !== 'admin') {
   header("Location: unauthorized.php");
   exit;
@@ -106,62 +108,54 @@ $user_email = $_SESSION['logged_in_user']['username'];
 
 $user_role = $_SESSION['logged_in_user']['role'];
 
-// retrieve user data from database
-// you would replace this with your own database code
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-$sql = "SELECT * FROM users";
-$result = mysqli_query($conn, $sql);
-$users = array();
-if(mysqli_num_rows($result) > 0) {
-  while($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $role = $_POST['role'];
+
+  if(empty($name) || empty($email) || empty($password) || empty($role)) {
+    $error = "Please fill in all fields.";
+  } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $error = "Invalid email address.";
+  } else {
+    $sql = "INSERT INTO users (username, email, password, role) VALUES ('$name', '$email', '$password', '$role')";
+    if(mysqli_query($conn, $sql)) {
+      header("Location: users-management.php");
+      exit;
+    } else {
+      $error = "Error adding user: " . mysqli_error($conn);
+    }
+    mysqli_close($conn);
   }
 }
+
 ?>
 
 
-<h1>Users Management</h1>
+<h1>Add User</h1>
 
-<?php if(isset($_SESSION['messages'])): ?>
-      <?php foreach($_SESSION['messages'] as $message): ?>
-        <center><p><?php echo $message; ?></p></center>
-      <?php endforeach; ?>
-      <?php unset($_SESSION['messages']); ?>
-    <?php endif; ?>
+<?php if(isset($error)): ?>
+  <p><?php echo $error; ?></p>
+<?php endif; ?>
 
-<a href="add-user-form.php">Add User</a>
-
-
-
-<br>
-
-<table border="1">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Edit User
-      </th>
-      <th>Delete User</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach($users as $user): ?>
-      <tr>
-        <td><?php echo $user['id']; ?></td>
-        <td><?php echo $user['username']; ?></td>
-        <td><?php echo $user['email']; ?></td>
-        <td><?php echo $user['role']; ?></td>
-        <td>
-          <button><a href="edit-user.php?id=<?php echo $user['id']; ?>">Edit</a></button>
-        </td>
-        <td>
-        <button><a href="delete-user.php?id=<?php echo $user['id']; ?>">Delete</a></button>
-        </td>
-      </tr>
-    <?php endforeach; ?>
-  </tbody>
-</table>
-
+<form action="add-user-form.php" method="post">
+  <label for="name">Name</label>
+  <input type="text" name="name" id="name">
+  <br>
+  <label for="email">Email</label>
+  <input type="email" name="email" id="email">
+  <br>
+  <label for="password">Password</label>
+  <input type="password" name="password" id="password">
+  <br>
+  <label for="role">Role</label>
+  <select name="role" id="role">
+    <option value="customer">Customer</option>
+    <option value="salesman">Salesman</option>
+    <option value="admin">Admin</option>
+  </select>
+  <br>
+  <button type="submit">Add User</button>
+</form>

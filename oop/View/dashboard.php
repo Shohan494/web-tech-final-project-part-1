@@ -1,29 +1,10 @@
 <?php
-
 session_start();
 
-include '../DatabaseConnection.php';
-
-$db = new DatabaseConnection();
-$conn = $db->getConnection();
-
-$user_id = $_SESSION['logged_in_user']['id'];
-
-// if role admin
-// customer, salesman crud
-
+$user_details = $_SESSION['logged_in_user'];
 $user_role = $_SESSION['logged_in_user']['role'];
 
-$sql = "SELECT * FROM users WHERE id=?";
-$stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "i", $user_id);
-mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
-
-$user_details = (mysqli_fetch_assoc($result));
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,11 +13,89 @@ $user_details = (mysqli_fetch_assoc($result));
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+legend {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+label {
+  display: inline-block;
+  width: 120px;
+  text-align: right;
+  margin-right: 20px;
+}
+
+input[type=text], input[type=password] {
+  width: 200px;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-success {
+  background-color: #5cb85c;
+}
+
+.btn-success:hover {
+  background-color: #449d44;
+}
+    </style>
+
 </head>
 <body>
 
 <ul>
   <li><a href="dashboard.php">Dashboard</a></li>
+
+<!-- A DIRECT PAGE SHOULD HAVE A CONTROLLER LINK BY DEFAULT THEN THE 
+CONTROLLERS DEFAULT METHOD WILL REDIRECT TO VIEW -->
   
   <?php if($user_role == 'admin'): ?>
     <li><a href="users-management.php">Users Management</a></li>
@@ -55,6 +114,14 @@ $user_details = (mysqli_fetch_assoc($result));
   
   <li><a href="logout.php">Logout</a></li>
 </ul>
+
+
+<?php if(isset($_SESSION['messages'])): ?>
+      <?php foreach($_SESSION['messages'] as $message): ?>
+        <center><p><?php echo $message; ?></p></center>
+      <?php endforeach; ?>
+      <?php unset($_SESSION['messages']); ?>
+<?php endif; ?>
 
 <fieldset>
     <legend>Profile Update:</legend>
@@ -96,11 +163,7 @@ $user_details = (mysqli_fetch_assoc($result));
 <fieldset>
     <legend>Password Change:</legend>
 
-<!-- display errors (if any) -->
-<?php if(isset($_SESSION['message'])): ?>
-  <p><?php echo $_SESSION['message']; ?></p>
-  <?php unset($_SESSION['message']); ?>
-<?php endif; ?>
+
     
 
 <form method="POST" action="PasswordChangeController.php">

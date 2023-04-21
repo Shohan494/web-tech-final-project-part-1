@@ -36,15 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     if ($flag === true) {
-        echo "Successfully Logged In";
+
+        $messages[] = "Successfully Logged In!";
 
         // USE SESSION TO PASS USER DETAILs
 
-        $_SESSION['logged_in_user'] = mysqli_fetch_assoc($result);
+        $_SESSION['logged_in_user'] = mysqli_fetch_assoc($result);   
 
-        echo "<pre>";
-        print_r($_SESSION['logged_in_user']);
-        echo "</pre>";
+        $_SESSION['messages'] = $messages;
 
         header("Location: ../View/dashboard.php");
 
