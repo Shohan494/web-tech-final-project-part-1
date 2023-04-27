@@ -85,6 +85,8 @@
 </head>
 <body>
 
+
+
 <?php
 
 session_start();
@@ -94,51 +96,76 @@ include '../DatabaseConnection.php';
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
-// Load products from the database
-// Assumes $conn is an established database connection object
-$sql = "SELECT * FROM products";
+if($_SESSION['logged_in_user']['role'] !== 'admin') {
+  header("Location: unauthorized.php");
+  exit;
+}
+
+$user_email = $_SESSION['logged_in_user']['username'];
+
+$user_role = $_SESSION['logged_in_user']['role'];
+
+$sql = "SELECT o.order_id, o.order_date, o.total_cost, c.email
+        FROM orders AS o
+        INNER JOIN users AS c
+        ON o.customer_id = c.id
+        ORDER BY o.order_date DESC";
+
 $result = mysqli_query($conn, $sql);
-$products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$orders = array();
+if(mysqli_num_rows($result) > 0) {
+  while($row = mysqli_fetch_assoc($result)) {
+    $orders[] = $row;
+  }
+}
 ?>
 
-<h1>Have to check only Admin/Salesman can have the access</h1>
+<h1>Orders Management</h1>
 
-<form method="post" action="place-order.php">
-  <table>
-    <thead>
+
+<a href="add-product-form.php">Add Product</a>
+
+<br>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Customer Email</th>
+      <th>Total Cost</th>
+      <th>Edit Product
+      </th>
+      <th>Delete Product</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($orders as $order): ?>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Quantity</th>
+        <td><?php echo $order['order_id']; ?></td>
+        <td><?php echo $order['order_date']; ?></td>
+        <td><?php echo $order['email']; ?></td>
+        <td><?php echo $order['total_cost']; ?></td>
+        <td>
+          <button><a href="edit-product.php?id=<?php echo $order['product_id']; ?>">Edit</a></button>
+        </td>
+        <td>
+          <button><a href="delete-product.php?id=<?php echo $order['product_id']; ?>">Delete</a></button>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      <?php foreach($products as $product): ?>
-        <tr>
-          <td><?php echo $product['product_id']; ?></td>
-
-          <input type="hidden" name="product_id[<?php echo $product['product_id']; ?>]" value="<?php echo $product['product_id']; ?>">
-          
-          <input type="hidden" name="price[<?php echo $product['product_id']; ?>]" value="<?php echo $product['price']; ?>">
-
-          <input type="hidden" name="customer_id" value="<?php echo $_GET['customer_id']; ?>">
+    <?php endforeach; ?>
+  </tbody>
+</table>
 
 
-          <td><?php echo $product['name']; ?></td>
-          <td><?php echo $product['description']; ?></td>
-          <td><?php echo $product['price']; ?></td>
-          <td>
-            <input type="number" name="quantity[<?php echo $product['product_id']; ?>]" min="0" value="0">
-          </td>
-        </tr>
-      <?php endforeach; ?>
-    </tbody>
-  </table>
 
-  <button type="submit">Place Order</button>
 
-  <h1>NOT SELECTED PRODUCTS WON'T BE INSERTED INTO ORDER DETAILS</h1>
 
-</form>
+
+
+    
+</body>
+</html>
+
+
+
