@@ -12,8 +12,8 @@ $user_role = $_SESSION['logged_in_user']['role'];
 
 
 
-
 <?php
+
 
 include '../DatabaseConnection.php';
 
@@ -29,21 +29,24 @@ $user_email = $_SESSION['logged_in_user']['username'];
 
 $user_role = $_SESSION['logged_in_user']['role'];
 
-$sql = "SELECT * FROM products";
+$sql = "SELECT o.order_id, o.order_date, o.total_cost, c.email
+        FROM orders AS o
+        INNER JOIN users AS c
+        ON o.customer_id = c.id
+        ORDER BY o.order_date DESC";
+
 $result = mysqli_query($conn, $sql);
-$products = array();
+$orders = array();
 if(mysqli_num_rows($result) > 0) {
   while($row = mysqli_fetch_assoc($result)) {
-    $products[] = $row;
+    $orders[] = $row;
   }
 }
 ?>
 
-<h1>Products Management</h1>
+<h1>Orders Management</h1>
 
-<h2>[ WOULD BE BETTER TO ADD QUANTITY AND BASIC CALCULATION  FOR EACH ORDER ]</h2>
-
-<a href="add-product-form.php">Add Product</a>
+<h2>Order Details Should Be Added</h2>
 
 <br>
 
@@ -51,26 +54,26 @@ if(mysqli_num_rows($result) > 0) {
   <thead>
     <tr>
       <th>ID</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
+      <th>Date</th>
+      <th>Customer Email</th>
+      <th>Total Cost</th>
       <th>Edit Product
       </th>
       <th>Delete Product</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach($products as $product): ?>
+    <?php foreach($orders as $order): ?>
       <tr>
-        <td><?php echo $product['product_id']; ?></td>
-        <td><?php echo $product['name']; ?></td>
-        <td><?php echo $product['description']; ?></td>
-        <td><?php echo $product['price']; ?></td>
+        <td><?php echo $order['order_id']; ?></td>
+        <td><?php echo $order['order_date']; ?></td>
+        <td><?php echo $order['email']; ?></td>
+        <td><?php echo $order['total_cost']; ?></td>
         <td>
-          <button><a href="edit-product.php?id=<?php echo $product['product_id']; ?>">Edit</a></button>
+          <button><a href="edit-product.php?id=<?php echo $order['product_id']; ?>">Edit</a></button>
         </td>
         <td>
-          <button><a href="delete-product.php?id=<?php echo $product['product_id']; ?>">Delete</a></button>
+          <button><a href="delete-product.php?id=<?php echo $order['product_id']; ?>">Delete</a></button>
         </td>
       </tr>
     <?php endforeach; ?>
@@ -83,9 +86,6 @@ if(mysqli_num_rows($result) > 0) {
 
 
 
-    
-</body>
-</html>
 
 
 

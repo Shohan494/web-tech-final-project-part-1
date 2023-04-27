@@ -1,15 +1,21 @@
 <?php
 session_start();
+
+include_once "header.php";
+
 ?>
+    <center><img src="../Assets/oil-station.png" alt="" class="logo-image"></center>
+    <center>
+        <h2>Fuel Distribution Login</h2>
+    </center>
 
-<body>
-    <center><h2>Fuel Distribution Login</h2></center>
-
-    <?php if(isset($_SESSION['messages'])): ?>
-      <?php foreach($_SESSION['messages'] as $message): ?>
-        <center><p><?php echo $message; ?></p></center>
-      <?php endforeach; ?>
-      <?php unset($_SESSION['messages']); ?>
+    <?php if (isset($_SESSION['messages'])) : ?>
+        <?php foreach ($_SESSION['messages'] as $message) : ?>
+            <center>
+                <p><?php echo $message; ?></p>
+            </center>
+        <?php endforeach; ?>
+        <?php unset($_SESSION['messages']); ?>
     <?php endif; ?>
 
     <div align="center">
@@ -44,7 +50,7 @@ session_start();
                                     <th></th>
                                     <td></td>
                                     <td align="right">
-                                        <input type="submit" value="Login">
+                                        <button class="btn btn-success" name="login_attempt">Login</button>
                                     </td>
                                 </tr>
                             </table>
@@ -55,7 +61,11 @@ session_start();
         </form>
 
         <p>For Registration as Customer, Click <a href="registration.php">here</a>.</p>
-		<p>Forgot your password, try <a href="forgot-password.php">here</a>.</p>
-	</div>
+        <p>Forgot your password, try <a href="forgot-password.php">here</a>.</p>
+    </div>
 
 
+
+<?php
+    include_once "footer.php";
+?>
