@@ -46,7 +46,7 @@ if(mysqli_num_rows($result) > 0) {
 
 <h1>Orders Management</h1>
 
-<h2>Order Details Should Be Added</h2>
+<h2>Order Details Should Be Added, and delete, edit is not manadatory</h2>
 
 <a href="create-order.php">Create New Order</a>
 
