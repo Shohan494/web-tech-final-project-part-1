@@ -87,6 +87,11 @@
 
 <?php
 
+if(empty($_GET['customer_id'])) {
+  header("Location: customers-list.php");
+  exit;
+}
+
 session_start();
 
 include '../DatabaseConnection.php';

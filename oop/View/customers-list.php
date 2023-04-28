@@ -28,7 +28,9 @@ $customers = mysqli_fetch_all($result, MYSQLI_ASSOC);
   <title>Customer Orders</title>
 </head>
 <body>
-  <h1>Customer Orders</h1>
+  <h1>Seleect Customer For Order Creation</h1>
+
+  <h2>BETTER TO ADD A JQUERY/JS SEARCH HERE</h2>
 
   <form action="" method="POST">
     <input type="text" name="search_term" placeholder="Search...">

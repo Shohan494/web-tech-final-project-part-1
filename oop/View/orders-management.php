@@ -48,6 +48,9 @@ if(mysqli_num_rows($result) > 0) {
 
 <h2>Order Details Should Be Added</h2>
 
+<a href="create-order.php">Create New Order</a>
+
+
 <br>
 
 <table border="1">
@@ -57,6 +60,8 @@ if(mysqli_num_rows($result) > 0) {
       <th>Date</th>
       <th>Customer Email</th>
       <th>Total Cost</th>
+      <th>View Order Details
+      </th>
       <th>Edit Product
       </th>
       <th>Delete Product</th>
@@ -69,6 +74,10 @@ if(mysqli_num_rows($result) > 0) {
         <td><?php echo $order['order_date']; ?></td>
         <td><?php echo $order['email']; ?></td>
         <td><?php echo $order['total_cost']; ?></td>
+        <td>
+          <center><button><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>">View Order Details</a></button></center>
+        </td>
+      
         <td>
           <button><a href="edit-product.php?id=<?php echo $order['product_id']; ?>">Edit</a></button>
         </td>
