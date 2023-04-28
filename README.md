@@ -12,28 +12,28 @@
 
 ## Features
 
-Common Features for All User Category:
+## Common Features for All User Category:
 - [x] 1.	Login/Sign in (for now php validation done)
 - [x] 2.	Registration/Signup (for now php validation done)
 - [ ] 3.	Forgot Password
 - [ ] 4.	Change Password
 - [ ] 5.	Profile (Update + View)
 - [ ] 6.	Logout 
-Student 1 (Owner/Manager):
+## Student 1 (Owner/Manager):
 - [ ] 1.	Create a new salesman, including their name and contact details.
 - [ ] 2.	Add a new product, including its name, description, and price.
 - [ ] 3.	Add a new customer, including their name and contact details.
 - [ ] 4.	View a list of all existing salesmen, products, and customers.
 - [ ] 5.	Update the details of an existing salesman, order, product, or customer.
 - [ ] 6.	Delete an existing salesman, product, or customer from the system.
-Student 2 (Salesman):
+## Student 2 (Salesman):
 - [ ] 1.	View a list of all products currently available for sale.
 - [ ] 2.	View list of customers and search among them for creating new orders
 - [ ] 3.	Place an order for a customer, selecting the product and the quantity of each item.
 - [ ] 4.	Generate invoice displaying total cost of orders.
 - [ ] 5.	Store invoices in file or database.
 - [ ] 6.	Send mail to customers including invoice if needed.
-Student 3 (Customer):
+## Student 3 (Customer):
 - [ ] 1.	See previous transactions and order details.
 - [ ] 2.	View the status of their current order.
 - [ ] 3.	Contact the sales team with any questions or concerns about their order.
