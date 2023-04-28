@@ -13,9 +13,9 @@
 ## Features
 
 Common Features for All User Category:
-- [ ] 1.	Login/Sign in
-- [ ] 2.	Registration/Signup
-- [ ] 3.	Forget Password
+- [x] 1.	Login/Sign in (for now php validation done)
+- [x] 2.	Registration/Signup (for now php validation done)
+- [ ] 3.	Forgot Password
 - [ ] 4.	Change Password
 - [ ] 5.	Profile (Update + View)
 - [ ] 6.	Logout 
