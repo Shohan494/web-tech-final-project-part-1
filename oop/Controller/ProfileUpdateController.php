@@ -26,6 +26,10 @@ if (isset($_POST['update_profile'])) {
     header("Location: ../View/dashboard.php");
     exit;
   } else {
-    $error = "Error updating user: " . mysqli_error($conn);
+
+    $messages[] = "Error updating user: " . mysqli_error($conn);
+    $_SESSION['messages'] = $messages;
+
+    header("Location: ../View/dashboard.php");
   }
 }

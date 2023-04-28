@@ -27,7 +27,7 @@ include_once "header.php";
         <tr>
           <td>
             <fieldset>
-              <legend><b>Registration:</b></legend>
+              <legend><b>Registration Form:</b></legend>
               <table>
                 <tr>
                   <td><label for="username">Username:</label></td>

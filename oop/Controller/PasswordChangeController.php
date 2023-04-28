@@ -20,53 +20,41 @@ if(isset($_POST['change_password'])) {
   $confirm_password = $_POST['confirm_password'];
 
   // basic password validation
-  $errors = array();
+  $messages = array();
   if(empty($old_password)) {
-    $errors[] = "Old password is required.";
+    $messages[] = "Old password is required.";
   }
   if(empty($new_password)) {
-    $errors[] = "New password is required.";
+    $messages[] = "New password is required.";
   }
   if(strlen($new_password) < 8) {
-    $errors[] = "New password must be at least 8 characters long.";
+    $messages[] = "New password must be at least 8 characters long.";
   }
   if($new_password !== $confirm_password) {
-    $errors[] = "New password and confirm password must match.";
+    $messages[] = "New password and confirm password must match.";
   }
 
   // if there are no errors
-  if(empty($errors)) {
+  if(empty($messages)) {
     if($old_password !== $current_password) {
-      $errors[] = "Old password is incorrect.";
+      $messages[] = "Old password is incorrect.";
     } else {
-    
-
     $sql = "UPDATE users SET password='$new_password' WHERE id='$current_user_id'";
     if(mysqli_query($conn, $sql)) {
-        header("Location: users-management.php");
-        exit;
-    } else {
-        $error = "Error updating user: " . mysqli_error($conn);
-    }        
-
-        
-      $_SESSION['message'] = "Password changed successfully.";
-      header("Location: dashboard.php");
+      $messages[] = "Password changed successfully.";
+      $_SESSION['messages'] = $messages;
+      header("Location: ../View/dashboard.php");
       exit;
+    } else {
+        $messages[] = "Error updating user: " . mysqli_error($conn);
+        $_SESSION['messages'] = $messages;
+        header("Location: ../View/dashboard.php");
+        exit;
+    }        
     }
   }
 
-  $_SESSION['errors'] = $errors;
-
+  $_SESSION['messages'] = $messages;
   header("Location: ../View/dashboard.php");
   exit;
 }
-
-?>
-
-<?php if(isset($_SESSION['errors'])): ?>
-  <?php foreach($_SESSION['errors'] as $error): ?>
-    <p><?php echo $error; ?></p>
-  <?php endforeach; ?>
-  <?php unset($_SESSION['errors']); ?>
-<?php endif; ?>

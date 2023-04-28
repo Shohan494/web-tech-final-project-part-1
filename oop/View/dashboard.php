@@ -21,10 +21,16 @@ $user_role = $_SESSION['logged_in_user']['role'];
     <?php unset($_SESSION['messages']); ?>
   <?php endif; ?>
 
-  <fieldset>
-    <legend>Profile Update:</legend>
 
-    <h1>DURING PROFILE UPDATE HAVE TO MAKE SURE EVEN FROM HERE NO DUPLICATE ENTRY TAKES PLACE AND PROPER ERROR MESSAGE IS SHOWED</h1>
+  <h1>PROFILE UPDATE SECTION</h1>
+
+
+  <fieldset>
+
+
+
+    <legend>Profile Update Form:</legend>
+
 
     <form method="post" action="../Controller/ProfileUpdateController.php">
 
@@ -43,12 +49,15 @@ $user_role = $_SESSION['logged_in_user']['role'];
 
   <br>
 
+  <h1>PASSWORD UPDATE SECTION</h1>
+
+
   <fieldset>
-    <legend>Password Change:</legend>
+    <legend>Password Update Form:</legend>
 
     <h1>OLD PASSOWRD FIELD IS ON FORM, BUT WHAT IS THE USE OF THIS FIELD HERE?</h1>
 
-    <form method="POST" action="PasswordChangeController.php">
+    <form method="POST" action="../Controller/PasswordChangeController.php">
       <label for="old_password">Old Password:</label>
       <input type="password" id="old_password" name="old_password" required><br>
 

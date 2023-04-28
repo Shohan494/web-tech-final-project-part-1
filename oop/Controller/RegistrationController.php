@@ -55,10 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
       $_SESSION['messages'] = $messages;
 
-      header("Location: login.php");
+      header("Location: ../View/login.php");
       exit;
     } else {
-      $errors[] = "Error adding user: " . mysqli_error($conn);
+      $messages[] = "Error adding user: " . mysqli_error($conn);
     }
   }
 

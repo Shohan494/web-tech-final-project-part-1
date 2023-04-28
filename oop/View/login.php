@@ -24,7 +24,7 @@ include_once "header.php";
                 <tr>
                     <td>
                         <fieldset>
-                            <legend><b>Login:</b></legend>
+                            <legend><b>Login Form:</b></legend>
                             <table>
                                 <tr>
                                     <th>
@@ -41,7 +41,7 @@ include_once "header.php";
                                     </th>
                                     <td>:</td>
                                     <td>
-                                        <input type="password" name="password" id="password" placeholder="password">
+                                        <input type="password" name="password" id="password">
                                     </td>
 
                                     <input type="hidden" name="secret" value="password">
