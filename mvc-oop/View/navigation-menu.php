@@ -13,7 +13,6 @@ CONTROLLERS DEFAULT METHOD WILL REDIRECT TO VIEW -->
 
       
       <li><a href="orders-statistics.php">Orders Statistics</a></li>
-      <li><a href="revenue.php">Revenue</a></li>
 
     <?php elseif ($user_role == 'customer') : ?>
 

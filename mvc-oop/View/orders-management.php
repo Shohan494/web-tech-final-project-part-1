@@ -63,9 +63,6 @@ if(mysqli_num_rows($result) > 0) {
       <th>Total Cost</th>
       <th>View Order Details
       </th>
-      <th>Edit Order
-      </th>
-      <th>Delete Order</th>
     </tr>
   </thead>
   <tbody>
@@ -79,12 +76,7 @@ if(mysqli_num_rows($result) > 0) {
           <center><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>"><button>View Order Details</button></a></center>
         </td>
       
-        <td>
-          <a href="edit-product.php?id=<?php echo $order['order_id']; ?>"><button>Edit Order</button></a>
-        </td>
-        <td>
-          <a href="delete-product.php?id=<?php echo $order['order_id']; ?>"><button>Delete Order</button></a>
-        </td>
+
       </tr>
     <?php endforeach; ?>
   </tbody>

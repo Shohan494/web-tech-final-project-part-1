@@ -4,14 +4,15 @@ session_start();
 $user_details = $_SESSION['logged_in_user'];
 $user_role = $_SESSION['logged_in_user']['role'];
 
+// cookie section for login user out
 
-if (isset($_COOKIE['user_login']) && ($_COOKIE['user_login'] == $user_details['username'])) {
+// if (isset($_COOKIE['user_login']) && ($_COOKIE['user_login'] == $user_details['username'])) {
 
-} else {
-  session_destroy();
-  header("Location: login.php");
-  exit;
-}
+// } else {
+//   session_destroy();
+//   header("Location: login.php");
+//   exit;
+// }
 
 
     include_once "header.php";

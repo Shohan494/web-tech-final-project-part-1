@@ -5,95 +5,81 @@ session_start();
 $user_details = $_SESSION['logged_in_user'];
 $user_role = $_SESSION['logged_in_user']['role'];
 
-?>
 
-<?php
-    include_once "header.php";
-    include_once "navigation-menu.php";
-
-?>
-
-<?php
+include_once "header.php";
+include_once "navigation-menu.php";
 
 include '../DatabaseConnection.php';
 
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
-// Query to retrieve the orders per month
-$sql = "SELECT MONTH(order_date) AS month, COUNT(*) AS count
-        FROM orders
-        WHERE YEAR(order_date) = YEAR(NOW())
-        GROUP BY MONTH(order_date)";
+$sql = "SELECT DATE_FORMAT(order_date, '%Y-%m') as order_month, COUNT(*) as num_orders, SUM(total_cost) as total_cost FROM orders GROUP BY order_month ORDER BY order_month ASC";
 
-$result = $conn->query($sql);
+$result = mysqli_query($conn, $sql);
 
-// Format the data for Chart.js
-$data = array(
-    "labels" => array(),
-    "data" => array()
-);
-
-while ($row = $result->fetch_assoc()) {
-    $data["labels"][] = date("F", mktime(0, 0, 0, $row["month"], 1));
-    $data["data"][] = $row["count"];
+$orderData = array();
+if(mysqli_num_rows($result) > 0) {
+  while($row = mysqli_fetch_assoc($result)) {
+    $orderData['labels'][] = $row['order_month'];
+    $orderData['data'][] = $row['num_orders'];
+    $orderData['total_cost'][] = $row['total_cost'];
+  }
 }
 
-// Close the database connection
-$conn->close();
-
+$orderDataJSON = json_encode($orderData);
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>All Orders Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    
 
+  <canvas id="orderChart"></canvas>
 
-<!-- Include the Chart.js library -->
+  <script>
+    // Retrieve the order data from PHP
+    var orderData = <?php echo $orderDataJSON; ?>;
 
-<!-- Create a canvas element to hold the chart -->
-<canvas id="orders-chart"></canvas>
-
-<!-- Add JavaScript to generate the chart -->
-<script>
-var ctx = document.getElementById('orders-chart').getContext('2d');
-var ordersChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: <?php echo json_encode($data["labels"]); ?>,
+    // Create the chart
+    var ctx = document.getElementById('orderChart').getContext('2d');
+    var chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: orderData.labels,
         datasets: [{
-            label: 'Orders per Month',
-            data: <?php echo json_encode($data["data"]); ?>
+          label: 'Number of Orders',
+          data: orderData.data,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        },
+        {
+          label: 'Total Cost',
+          data: orderData.total_cost,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
         }]
-    },
-    options: {
+      },
+      options: {
         scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
         }
-    }
-});
-</script>
-
-
-
-
-
+      }
+    });
+  </script>
 
 </body>
 </html>
