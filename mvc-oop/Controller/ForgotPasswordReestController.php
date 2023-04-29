@@ -16,12 +16,12 @@ include '../Controller/UserController.php';
 
     $user = $userCtrl->getUserByToken($token);
     if (!$user) {
-      header("Location: reset-password-error.php");
+      header("Location: ../View/reset-password-error.php");
       exit;
     }
 
     $userCtrl->updatePassword($user['id'], $password);
-    header("Location: reset-password-success.php");
+    header("Location: ../View/reset-password-success.php");
     exit;
   }
 

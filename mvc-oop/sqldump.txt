@@ -1,0 +1,15 @@
+INSERT INTO `users` (`username`, `password`, `email`, `role`, `token`) 
+VALUES 
+('customer1', 'password1', 'customer1@example.com', 'customer', 'token1'),
+('customer2', 'password2', 'customer2@example.com', 'customer', 'token2'),
+('customer3', 'password3', 'customer3@example.com', 'customer', 'token3'),
+('customer4', 'password4', 'customer4@example.com', 'customer', 'token4'),
+('customer5', 'password5', 'customer5@example.com', 'customer', 'token5'),
+('customer6', 'password6', 'customer6@example.com', 'customer', 'token6'),
+('customer7', 'password7', 'customer7@example.com', 'customer', 'token7'),
+('customer8', 'password8', 'customer8@example.com', 'customer', 'token8'),
+('customer9', 'password9', 'customer9@example.com', 'customer', 'token9'),
+('customer10', 'password10', 'customer10@example.com', 'customer', 'token10');
+
+
+

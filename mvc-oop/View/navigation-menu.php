@@ -6,8 +6,12 @@ CONTROLLERS DEFAULT METHOD WILL REDIRECT TO VIEW -->
 
     <?php if ($user_role == 'admin') : ?>
       <li><a href="users-management.php">Users Management</a></li>
+      <li><a href="users-management-ajax-delete.php">Users Management(Ajax Delete)</a></li>
+
       <li><a href="products-management.php">Products Management</a></li>
       <li><a href="orders-management.php">Orders Management</a></li>
+
+      
       <li><a href="orders-statistics.php">Orders Statistics</a></li>
       <li><a href="revenue.php">Revenue</a></li>
 
