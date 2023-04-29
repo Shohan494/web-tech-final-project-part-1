@@ -45,7 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $_SESSION['messages'] = $messages;
 
-        setcookie('auto_logout', '1', time() + 10, '/');
+        $cookie_expiration_time = time() + 15;
+
+        setcookie("user_login", $_SESSION['logged_in_user']['username'], $cookie_expiration_time, '/');
+
+
+        print_r(time());
+        echo "<br>";
+        print_r(time() + 60);
+        echo "<br>";
+
+        print_r($_COOKIE['user_login']);
+        echo "<br>";
+        print_r($_SESSION['logged_in_user']['username']);
+
 
         header("Location: ../View/dashboard.php");
 

@@ -4,9 +4,16 @@ session_start();
 $user_details = $_SESSION['logged_in_user'];
 $user_role = $_SESSION['logged_in_user']['role'];
 
-?>
 
-<?php
+if (isset($_COOKIE['user_login']) && ($_COOKIE['user_login'] == $user_details['username'])) {
+
+} else {
+  session_destroy();
+  header("Location: login.php");
+  exit;
+}
+
+
     include_once "header.php";
     include_once "navigation-menu.php";
 ?>

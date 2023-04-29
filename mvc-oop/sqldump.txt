@@ -13,3 +13,29 @@ VALUES
 
 
 
+
+INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `created_at`, `updated_at`) VALUES
+(5, 'Jet Fuel', 'Fuel for jet engines', 3.2, '2023-03-11 11:07:05', '2023-03-11 11:07:05'),
+(6, 'Natural Gas', 'Fuel for natural gas engines', 1.5, '2023-03-11 11:07:05', '2023-03-11 11:07:05'),
+(7, 'Ethanol', 'Fuel for ethanol engines', 2, '2023-03-11 11:07:05', '2023-03-11 11:07:05'),
+(8, 'Biodiesel', 'Fuel for biodiesel engines', 2.1, '2023-03-11 11:07:05', '2023-03-11 11:07:05'),
+(9, 'Methanol', 'Fuel for methanol engines', 2.3, '2023-03-11 11:07:05', '2023-03-11 11:07:05'),
+(10, 'Electricity', 'Fuel for electric engines', 0.8, '2023-03-11 11:07:05', '2023-03-11 11:07:05');
+
+
+INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `created_at`, `updated_at`) VALUES
+(11, 'Diesel', 'Fuel for diesel engines', 2.5, '2023-04-01 08:00:00', '2023-04-01 08:00:00'),
+(12, 'Gasoline', 'Fuel for gasoline engines', 2.8, '2023-04-02 09:00:00', '2023-04-02 09:00:00'),
+(13, 'Bioethanol', 'Fuel for bioethanol engines', 2.2, '2023-04-03 10:00:00', '2023-04-03 10:00:00'),
+(14, 'Liquefied Petroleum Gas (LPG)', 'Fuel for LPG engines', 1.7, '2023-04-04 11:00:00', '2023-04-04 11:00:00'),
+(15, 'Compressed Natural Gas (CNG)', 'Fuel for CNG engines', 1.4, '2023-04-05 12:00:00', '2023-04-05 12:00:00'),
+(16, 'Propane', 'Fuel for propane engines', 2.0, '2023-04-06 13:00:00', '2023-04-06 13:00:00'),
+(17, 'Hydrogen', 'Fuel for hydrogen engines', 3.0, '2023-04-07 14:00:00', '2023-04-07 14:00:00'),
+(18, 'Methane', 'Fuel for methane engines', 2.6, '2023-04-08 15:00:00', '2023-04-08 15:00:00'),
+(19, 'Butane', 'Fuel for butane engines', 2.1, '2023-04-09 16:00:00', '2023-04-09 16:00:00'),
+(20, 'Dimethyl Ether (DME)', 'Fuel for DME engines', 2.9, '2023-04-10 17:00:00', '2023-04-10 17:00:00'),
+(21, 'Cocaine', 'Illegal fuel for illegal engines', 99.99, '2023-04-11 18:00:00', '2023-04-11 18:00:00'),
+(22, 'Acetone', 'Fuel for acetone engines', 1.9, '2023-04-12 19:00:00', '2023-04-12 19:00:00'),
+(23, 'Compressed Air', 'Fuel for compressed air engines', 0.5, '2023-04-13 20:00:00', '2023-04-13 20:00:00'),
+(24, 'Kerosene', 'Fuel for kerosene engines', 2.3, '2023-04-14 21:00:00', '2023-04-14 21:00:00'),
+(25, 'Vegetable Oil', 'Fuel for vegetable oil engines', 1.8, '2023-04-15 22:00:00', '2023-04-15 
