@@ -30,10 +30,11 @@ class UserController {
   }
 
   public function updatePassword($userId, $newPassword) {
+
+    $valueOfNull = null;
   
-  
-    $stmt = $this->conn->prepare("UPDATE users SET password = ? WHERE id = ?");
-    $stmt->bind_param("si", $newPassword, $userId);
+    $stmt = $this->conn->prepare("UPDATE users SET password=?, token=? WHERE id = ?");
+    $stmt->bind_param("ssi", $newPassword, $valueOfNull, $userId);
     $stmt->execute();
   
     if ($stmt->affected_rows == 1) {
