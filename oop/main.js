@@ -1,7 +1,13 @@
 function isValid(pForm) {
 	
+	if (pForm.username.value === "") {
+		document.getElementById("username_msg").innerHTML = "Please fill up the username";
+	}
 	if (pForm.email.value === "") {
 		document.getElementById("email_msg").innerHTML = "Please fill up the email";
+	}
+	if (pForm.password.value === "") {
+		document.getElementById("password_msg").innerHTML = "Please fill up the password";
 	}
 	if (pForm.password.value === "") {
 		document.getElementById("password_msg").innerHTML = "Please fill up the password";
