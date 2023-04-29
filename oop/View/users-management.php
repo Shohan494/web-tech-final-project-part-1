@@ -88,7 +88,7 @@ if(mysqli_num_rows($result) > 0) {
           <button><a href="edit-user.php?id=<?php echo $user['id']; ?>">Edit</a></button>
         </td>
         <td>
-        <button><a href="delete-user.php?id=<?php echo $user['id']; ?>">Delete</a></button>
+        <button><a href="../Controller/DeleteUserController.php?id=<?php echo $user['id']; ?>">Delete</a></button>
         </td>
       </tr>
     <?php endforeach; ?>
