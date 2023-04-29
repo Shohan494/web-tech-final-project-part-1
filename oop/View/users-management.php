@@ -8,9 +8,9 @@ $user_role = $_SESSION['logged_in_user']['role'];
 
 <?php
     include_once "header.php";
+    include_once "navigation-menu.php";
+
 ?>
-
-
 
 <?php
 

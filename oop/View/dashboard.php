@@ -8,9 +8,8 @@ $user_role = $_SESSION['logged_in_user']['role'];
 
 <?php
     include_once "header.php";
+    include_once "navigation-menu.php";
 ?>
-
-
 
   <?php if (isset($_SESSION['messages'])) : ?>
     <?php foreach ($_SESSION['messages'] as $message) : ?>
@@ -35,7 +34,7 @@ $user_role = $_SESSION['logged_in_user']['role'];
     <form method="post" action="../Controller/ProfileUpdateController.php">
 
       <label for="email">Email</label>
-      <input type="text" name="email" value="<?php echo $user_details['email']; ?>" class="form-control">
+      <input type="email" name="email" value="<?php echo $user_details['email']; ?>" class="form-control">
       <br>
 
       <label>Username</label>
@@ -54,8 +53,6 @@ $user_role = $_SESSION['logged_in_user']['role'];
 
   <fieldset>
     <legend>Password Update Form:</legend>
-
-    <h1>OLD PASSOWRD FIELD IS ON FORM, BUT WHAT IS THE USE OF THIS FIELD HERE?</h1>
 
     <form method="POST" action="../Controller/PasswordChangeController.php">
       <label for="old_password">Old Password:</label>

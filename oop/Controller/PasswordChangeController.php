@@ -27,8 +27,8 @@ if(isset($_POST['change_password'])) {
   if(empty($new_password)) {
     $messages[] = "New password is required.";
   }
-  if(strlen($new_password) < 8) {
-    $messages[] = "New password must be at least 8 characters long.";
+  if(strlen($new_password) < 6) {
+    $messages[] = "New password must be at least 6 characters long.";
   }
   if($new_password !== $confirm_password) {
     $messages[] = "New password and confirm password must match.";
