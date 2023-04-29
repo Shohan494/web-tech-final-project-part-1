@@ -8,6 +8,8 @@ $user_role = $_SESSION['logged_in_user']['role'];
 
 <?php
     include_once "header.php";
+    include_once "navigation-menu.php";
+
 ?>
 
 
@@ -41,9 +43,21 @@ if(mysqli_num_rows($result) > 0) {
 
 <h1>Products Management</h1>
 
+<?php if (isset($_SESSION['messages'])) : ?>
+    <?php foreach ($_SESSION['messages'] as $message) : ?>
+      <center>
+        <p><?php echo $message; ?></p>
+      </center>
+    <?php endforeach; ?>
+    <?php unset($_SESSION['messages']); ?>
+  <?php endif; ?>
+
 <h2>[ WOULD BE BETTER TO ADD QUANTITY AND BASIC CALCULATION  FOR EACH ORDER ]</h2>
 
-<a href="add-product-form.php">Add Product</a>
+<button class="btn btn-success"><a href="add-product-form.php">Add Product</a></button>
+
+<a href="add-product-form.php"><button class="btn btn-success">Add Product</button></a>
+
 
 <br>
 
@@ -53,7 +67,7 @@ if(mysqli_num_rows($result) > 0) {
       <th>ID</th>
       <th>Name</th>
       <th>Description</th>
-      <th>Price</th>
+      <th>Price (BDT/LITRE)</th>
       <th>Edit Product
       </th>
       <th>Delete Product</th>

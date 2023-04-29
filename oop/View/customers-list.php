@@ -1,8 +1,19 @@
 <?php
 session_start();
-include '../DatabaseConnection.php';
-$db = new DatabaseConnection();
-$conn = $db->getConnection();
+
+$user_details = $_SESSION['logged_in_user'];
+$user_role = $_SESSION['logged_in_user']['role'];
+
+?>
+
+<?php
+    include_once "header.php";
+    include_once "navigation-menu.php";
+
+    include '../DatabaseConnection.php';
+    $db = new DatabaseConnection();
+    $conn = $db->getConnection();
+
 
 
 if(isset($_POST['search'])) {

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>JS Example</title>
+	<style>
+		span {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+
+	<form action="Submit.php" method="post" onsubmit="return isValid(this);"> 
+		Email: <input type="email" name="email">
+		<span id="email_msg"></span>
+		<br><br>
+		Password: <input type="password" name="password">
+		<span id="password_msg"></span>
+		<br><br>
+		<input type="submit">
+	</form>
+	<script src="main.js"></script>
+
+</body>
+</html>

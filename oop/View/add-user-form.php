@@ -73,12 +73,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   <label for="password">Password</label>
   <input type="password" name="password" id="password">
   <br>
+  <br>
   <label for="role">Role</label>
   <select name="role" id="role">
     <option value="customer">Customer</option>
     <option value="salesman">Salesman</option>
     <option value="admin">Admin</option>
   </select>
+  <br>
   <br>
   <button type="submit">Add User</button>
 </form>

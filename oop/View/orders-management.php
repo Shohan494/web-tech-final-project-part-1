@@ -8,6 +8,7 @@ $user_role = $_SESSION['logged_in_user']['role'];
 
 <?php
     include_once "header.php";
+    include_once "navigation-menu.php";
 ?>
 
 
@@ -46,11 +47,11 @@ if(mysqli_num_rows($result) > 0) {
 
 <h1>Orders Management</h1>
 
-<h2>Order Details Should Be Added, and delete, edit is not manadatory</h2>
 
-<a href="create-order.php">Create New Order</a>
+<a href="create-order.php"><button class="btn btn-success">Create New Order</button></a>
 
 
+<br>
 <br>
 
 <table border="1">
@@ -62,9 +63,9 @@ if(mysqli_num_rows($result) > 0) {
       <th>Total Cost</th>
       <th>View Order Details
       </th>
-      <th>Edit Product
+      <th>Edit Order
       </th>
-      <th>Delete Product</th>
+      <th>Delete Order</th>
     </tr>
   </thead>
   <tbody>
@@ -75,14 +76,14 @@ if(mysqli_num_rows($result) > 0) {
         <td><?php echo $order['email']; ?></td>
         <td><?php echo $order['total_cost']; ?></td>
         <td>
-          <center><button><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>">View Order Details</a></button></center>
+          <center><a href="order-details.php?order_id=<?php echo $order['order_id']; ?>"><button>View Order Details</button></a></center>
         </td>
       
         <td>
-          <button><a href="edit-product.php?id=<?php echo $order['product_id']; ?>">Edit</a></button>
+          <a href="edit-product.php?id=<?php echo $order['order_id']; ?>"><button>Edit Order</button></a>
         </td>
         <td>
-          <button><a href="delete-product.php?id=<?php echo $order['product_id']; ?>">Delete</a></button>
+          <a href="delete-product.php?id=<?php echo $order['order_id']; ?>"><button>Delete Order</button></a>
         </td>
       </tr>
     <?php endforeach; ?>

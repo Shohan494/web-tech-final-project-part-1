@@ -9,7 +9,6 @@ $user_role = $_SESSION['logged_in_user']['role'];
 <?php
     include_once "header.php";
     include_once "navigation-menu.php";
-
 ?>
 
 <?php
@@ -48,8 +47,6 @@ if(mysqli_num_rows($result) > 0) {
 
 <h1>Users Management</h1>
 
-<h2>BUTTON CAN EITHER BE CALLED VIA JS OR BUTTON/LIONK CSS SHOULD BE DIFFERENT, CURRENT LOOK IS UNPROFESSIONAL</h2>
-
 <?php if(isset($_SESSION['messages'])): ?>
       <?php foreach($_SESSION['messages'] as $message): ?>
         <center><p><?php echo $message; ?></p></center>
@@ -59,7 +56,7 @@ if(mysqli_num_rows($result) > 0) {
 
 
 
-<button class="btn btn-success" name="login_attempt"><a href="add-user-form.php">Add User</a></button>
+<button class="btn btn-success"><a href="add-user-form.php">Add User</a></button>
 
 
 

@@ -1,98 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-      /* reset default margin and padding */
-      * {
-        margin: 0;
-        padding: 0;
-      }
+<?php
+session_start();
 
-      /* basic page layout */
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
+$user_details = $_SESSION['logged_in_user'];
+$user_role = $_SESSION['logged_in_user']['role'];
 
-      h1 {
-        font-size: 2em;
-        margin-bottom: 20px;
-      }
-
-      h2 {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-      }
-
-      table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-bottom: 20px;
-      }
-
-      th,
-      td {
-        padding: 10px;
-        text-align: left;
-        border: 1px solid #ddd;
-      }
-
-      th {
-        background-color: #f2f2f2;
-      }
-
-      /* add some color */
-      h1,
-      h2 {
-        color: #333;
-      }
-
-      table {
-        background-color: #fff;
-      }
-
-      th,
-      td {
-        background-color: #f9f9f9;
-      }
-
-      /* button styles */
-      button {
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        padding: 8px 16px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 14px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 4px;
-      }
-
-      /* button hover effect */
-      button:hover {
-        background-color: #3e8e41;
-      }
-    </style>
-</head>
-<body>
+?>
 
 <?php
+    include_once "header.php";
+    include_once "navigation-menu.php";
 
-session_start();
+?>
+
+<?php
 
 include '../DatabaseConnection.php';
 
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
+
 
 if($_SESSION['logged_in_user']['role'] !== 'admin') {
   header("Location: unauthorized.php");

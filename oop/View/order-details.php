@@ -7,7 +7,8 @@ $user_role = $_SESSION['logged_in_user']['role'];
 ?>
 
 <?php
-include_once "header.php";
+    include_once "header.php";
+    include_once "navigation-menu.php";
 ?>
 
 
@@ -31,6 +32,14 @@ if(isset($_GET['order_id']) && !empty($_GET['order_id'])) {
           ON od.product_id = p.product_id
           WHERE od.order_id = '$order_id'";
 
+$sql = "SELECT p.name, od.quantity, od.price, od.subtotal, u.email, o.order_date
+FROM order_details AS od
+INNER JOIN products AS p ON od.product_id = p.product_id
+INNER JOIN orders AS o ON od.order_id = o.order_id
+INNER JOIN users AS u ON o.customer_id = u.id
+WHERE od.order_id = '$order_id'";
+
+
   $result = mysqli_query($conn, $sql);
   $order_details = array();
   $total_cost = 0;
@@ -50,7 +59,9 @@ if(isset($_GET['order_id']) && !empty($_GET['order_id'])) {
 
 <h2>Order ID: <?php echo $order_id; ?></h2>
 
-<h3>Products:</h3>
+<h2>Customer Email: <?php isset($order_details[0]['email'])? $order_details[0]['email']: ""; ?></h2>
+
+<h3>Products List:</h3>
 
 <table border="1">
   <thead>
@@ -62,12 +73,12 @@ if(isset($_GET['order_id']) && !empty($_GET['order_id'])) {
     </tr>
   </thead>
   <tbody>
-    <?php foreach($order_details as $product): ?>
+    <?php foreach($order_details as $order_detail): ?>
       <tr>
-        <td><?php echo $product['name']; ?></td>
-        <td><?php echo $product['quantity']; ?></td>
-        <td><?php echo $product['price']; ?></td>
-        <td><?php echo $product['subtotal']; ?></td>
+        <td><?php echo $order_detail['name']; ?></td>
+        <td><?php echo $order_detail['quantity']; ?></td>
+        <td><?php echo $order_detail['price']; ?></td>
+        <td><?php echo $order_detail['subtotal']; ?></td>
       </tr>
     <?php endforeach; ?>
   </tbody>
@@ -81,7 +92,7 @@ if(isset($_GET['order_id']) && !empty($_GET['order_id'])) {
 
 <br>
 
-<a href="orders-management.php">Back to Orders List</a>
+<a href="orders-management.php"><button>Back to Orders List</button></a>
 
 <?php
 include_once "footer.php";

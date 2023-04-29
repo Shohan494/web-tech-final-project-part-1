@@ -45,6 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $_SESSION['messages'] = $messages;
 
+        setcookie('auto_logout', '1', time() + 10, '/');
+
         header("Location: ../View/dashboard.php");
 
         

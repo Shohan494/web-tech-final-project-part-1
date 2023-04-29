@@ -60,7 +60,10 @@ include_once "header.php";
             </table>
         </form>
 
-        <p>For Registration as Customer, Click <a href="registration.php">here</a>.</p>
+        <p>For Registration as Customer (PHP Validation), Click <a href="registration.php">here</a>.</p>
+
+        <p>For Registration as Customer (JS Validation), Click <a href="registration-js.php">here</a>.</p>
+
         <p>Forgot your password, try <a href="forgot-password.php">here</a>.</p>
     </div>
 
