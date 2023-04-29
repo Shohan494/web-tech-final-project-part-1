@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $_SESSION['messages'] = $messages;
 
-        $cookie_expiration_time = time() + 15;
+        $cookie_expiration_time = time() + 60;
 
         setcookie("user_login", $_SESSION['logged_in_user']['username'], $cookie_expiration_time, '/');
 
