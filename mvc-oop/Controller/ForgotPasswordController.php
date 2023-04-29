@@ -1,6 +1,5 @@
 <?php
 
-
 include '../DatabaseConnection.php';
 
 $db = new DatabaseConnection();
@@ -44,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 $messages[] = 'Click the link below to reset your password:';
                 
-                $messages[] = "<a href=http://localhost/webTechMidProject/oop/View/reset-password.php?token=$token" . ">Link for Passowrd Reset</a>";
+                $messages[] = "<a href=http://localhost/webTechMidProject/mvc-oop/View/reset-password.php?token=$token" . ">Link for Passowrd Reset</a>";
 
                 $_SESSION['messages'] = $messages;
             

@@ -4,12 +4,18 @@ include '../DatabaseConnection.php';
 
 class UserController {
 
+
+  private $conn;
+
+  public function __construct() {
+    $db = new DatabaseConnection();
+    $this->conn = $db->getConnection();
+  }
+
+
   public function getUserByToken($token) {
 
-    $db = new DatabaseConnection();
-    $conn = $db->getConnection();
-
-    $stmt = $conn->prepare("SELECT * FROM users WHERE token = ?");
+    $stmt = $this->conn->prepare("SELECT * FROM users WHERE token = ?");
     $stmt->bind_param("s", $token);
     $stmt->execute();
 
@@ -22,4 +28,19 @@ class UserController {
       return null;
     }
   }
+
+  public function updatePassword($userId, $newPassword) {
+  
+  
+    $stmt = $this->conn->prepare("UPDATE users SET password = ? WHERE id = ?");
+    $stmt->bind_param("si", $newPassword, $userId);
+    $stmt->execute();
+  
+    if ($stmt->affected_rows == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
 }
