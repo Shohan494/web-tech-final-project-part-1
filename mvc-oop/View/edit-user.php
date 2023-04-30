@@ -54,6 +54,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $sql .= " WHERE id='$user_id'";
     if(mysqli_query($conn, $sql)) {
+
+      $messages[] = "User Data Updated";
+      $_SESSION['messages'] = $messages;
       header("Location: users-management.php");
       exit;
     } else {

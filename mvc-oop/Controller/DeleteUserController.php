@@ -28,6 +28,10 @@ $id = $_GET['id'];
 $sql = "DELETE FROM users WHERE id = '$id'";
 
 if(mysqli_query($conn, $sql)) {
+
+
+  $messages[] = "User Deleted";
+  $_SESSION['messages'] = $messages;
   header("Location: ../View/users-management.php");
   exit;
 } else {

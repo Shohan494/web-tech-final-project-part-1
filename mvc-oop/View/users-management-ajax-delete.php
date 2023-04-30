@@ -32,8 +32,6 @@ $result = $stmt->get_result();
 $users = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
-
-
     
     <script>
     $(document).ready(function() {
@@ -50,6 +48,7 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
           data: {user_id: user_id}
         }).done(function(response) {
             $('#user-' + user_id).remove();
+            document.getElementById("user_deleted_message").innerHTML = "Ajax Call User Deleted";
         console.log("inside done");
         }).fail(function(xhr, status, error) {
         console.log("Error: " + error);
@@ -61,6 +60,8 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
 
 <body>
     <h1>Users Management Ajax Delete</h1>
+
+    <p><span id="user_deleted_message"></span></p>
 
     <a href="create-user.php"><button>Create New User</button></a>
     <a href="dashboard.php"><button>Back to Dashboard</button></a>

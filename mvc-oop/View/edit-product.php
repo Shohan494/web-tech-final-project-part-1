@@ -38,6 +38,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_query($conn, $update_query);
     
     if($result){
+
+
+        $messages[] = "Product Data Updated";
+        $_SESSION['messages'] = $messages;
         header('Location: products-management.php');
     } else {
         print_r($conn->error);

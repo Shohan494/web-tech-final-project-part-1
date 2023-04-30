@@ -13,7 +13,7 @@ $user_role = $_SESSION['logged_in_user']['role'];
 
 <?php
 
-print_r($user_role);
+// print_r($user_role);
 
 
 include '../DatabaseConnection.php';
@@ -45,6 +45,16 @@ if(mysqli_num_rows($result) > 0) {
 ?>
 
 <h1>Orders Management</h1>
+
+<?php if (isset($_SESSION['messages'])) : ?>
+  <?php foreach ($_SESSION['messages'] as $message) : ?>
+    <center>
+      <p><?php echo $message; ?></p>
+    </center>
+  <?php endforeach; ?>
+  <?php unset($_SESSION['messages']); ?>
+<?php endif; ?>
+
 
 
 <a href="create-order.php"><button class="btn btn-success">Create New Order</button></a>

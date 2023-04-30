@@ -77,6 +77,12 @@ body {
     height: 200px;
 }
 
+#orderChart {
+  height: 400px;
+  width: 600px;
+}
+
+
 /* table {
     border-collapse: collapse;
     width: 100%;

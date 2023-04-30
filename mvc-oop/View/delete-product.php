@@ -32,6 +32,10 @@ $sql = "DELETE FROM products WHERE product_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
 if ($stmt->execute()) {
+
+
+  $messages[] = "Product Deleted";
+  $_SESSION['messages'] = $messages;
 header("Location: products-management.php");
 exit;
 } else {

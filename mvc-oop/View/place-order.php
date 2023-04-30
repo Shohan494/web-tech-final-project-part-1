@@ -1,6 +1,8 @@
 <?php
-
 session_start();
+
+$user_details = $_SESSION['logged_in_user'];
+$user_role = $_SESSION['logged_in_user']['role'];
 
 include '../DatabaseConnection.php';
 
@@ -74,11 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Update the total cost of the order
     $sql = "UPDATE orders SET total_cost = '$total_cost' WHERE order_id = '$order_id'";
     mysqli_query($conn, $sql);
 
-    // Redirect to the order confirmation page
+    $messages[] = "New Order Created";
+    $_SESSION['messages'] = $messages;
+
     header("Location: orders-management.php");
 }
 ?>

@@ -34,13 +34,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productName = $_POST['product_name'];
     $productPrice = $_POST['product_price'];
     $productDescription = $_POST['product_description'];
-
   
     if(empty($productName) || empty($productPrice)) {
       $error = "Please fill in all fields.";
     } else {
         $sql = "INSERT INTO products (name, price, description) VALUES ('$productName', '$productPrice', '$productDescription')";
         if(mysqli_query($conn, $sql)) {
+
+          $messages[] = "New Product Created";
+
+          $_SESSION['messages'] = $messages;
+          
           header("Location: products-management.php");
           exit;
         } else {

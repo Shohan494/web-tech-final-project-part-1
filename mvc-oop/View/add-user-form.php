@@ -32,6 +32,8 @@ $user_email = $_SESSION['logged_in_user']['username'];
 
 $user_role = $_SESSION['logged_in_user']['role'];
 
+$messages = array();
+
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $name = $_POST['name'];
@@ -46,6 +48,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   } else {
     $sql = "INSERT INTO users (username, email, password, role) VALUES ('$name', '$email', '$password', '$role')";
     if(mysqli_query($conn, $sql)) {
+
+  
+      $messages[] = "New User Created";
+      $_SESSION['messages'] = $messages;
+
       header("Location: users-management.php");
       exit;
     } else {
