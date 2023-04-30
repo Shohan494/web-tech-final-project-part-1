@@ -7,6 +7,11 @@ include '../DatabaseConnection.php';
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
+if ($user_role !== 'admin' && $user_role !== 'salesman') {
+    header("Location: unauthorized.php");
+    exit;
+  }
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     print_r($_POST['quantity']);

@@ -24,35 +24,29 @@ if($_SESSION['logged_in_user']['role'] !== 'admin') {
   exit;
 }
 
-if(isset($_POST['submit'])){
-    // retrieve form data
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    var_dump($_POST);
+    //var_dump($_POST);
 
     $product_id = $_POST['product_id'];
     $product_name = $_POST['product_name'];
     $product_description = $_POST['product_description'];
     $product_price = $_POST['product_price'];
     
-    // update product data in database
     $update_query = "UPDATE products SET name='$product_name', description='$product_description', price='$product_price' WHERE product_id='$product_id'";
 
     $result = mysqli_query($conn, $update_query);
     
     if($result){
-        // redirect to products list page
         header('Location: products-management.php');
     } else {
-        // display error message
         print_r($conn->error);
         echo "Error updating product";
     }
 }
 
-// get product id from URL parameter
 $product_id = $_GET['id'];
 
-// retrieve product data from database
 $select_query = "SELECT * FROM products WHERE product_id='$product_id'";
 $result = mysqli_query($conn, $select_query);
 $product = mysqli_fetch_assoc($result);
@@ -74,7 +68,7 @@ $product = mysqli_fetch_assoc($result);
         <label>Product Price:</label>
         <input type="number" name="product_price" step="any" value="<?php echo $product['price']; ?>"><br><br>
 
-        <input type="submit" name="submit" value="Update Product">
+        <button type="submit">Update Product</button>    
     </form>
     <?php
 

@@ -84,3 +84,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   <br>
   <button type="submit">Add User</button>
 </form>
+<a href="dashboard.php"><button>Back to Dashboard</button></a>
+
+
+<?php
+
+include 'footer.php';
+
+?>

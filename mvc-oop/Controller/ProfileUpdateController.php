@@ -25,6 +25,8 @@ if (isset($_POST['update_profile'])) {
 
     $_SESSION['messages'] = $messages;
 
+    // again query after update
+
     $sql = "SELECT * FROM users WHERE id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $user_id);

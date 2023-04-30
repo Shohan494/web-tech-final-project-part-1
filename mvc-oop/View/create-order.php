@@ -15,14 +15,25 @@ $user_role = $_SESSION['logged_in_user']['role'];
     $conn = $db->getConnection();
 
 
+    if ($user_role !== 'admin' && $user_role !== 'salesman') {
+      header("Location: unauthorized.php");
+      exit;
+    }
+    
+  
+
+
 if(empty($_GET['customer_id'])) {
+
+  $messages[] = "Please select customer for creating order";
+  $_SESSION['messages'] = $messages;
+
   header("Location: customers-list.php");
   exit;
 }
 
 
-// Load products from the database
-// Assumes $conn is an established database connection object
+
 $sql = "SELECT * FROM products";
 $result = mysqli_query($conn, $sql);
 $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -68,6 +79,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
   <button type="submit">Place Order</button>
 
-  <h1>NOT SELECTED PRODUCTS WON'T BE INSERTED INTO ORDER DETAILS</h1>
 
 </form>
+
+<a href="customers-list.php"><button>Back to Customer Select</button></a>

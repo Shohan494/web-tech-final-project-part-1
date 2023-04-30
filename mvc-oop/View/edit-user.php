@@ -27,13 +27,10 @@ if($_SESSION['logged_in_user']['role'] !== 'admin') {
 
 $user_email = $_SESSION['logged_in_user']['username'];
 
-// if role admin
-// customer, salesman crud
 
 $user_role = $_SESSION['logged_in_user']['role'];
 
-// retrieve user data from database
-// you would replace this with your own database code
+
 $user_id = $_GET['id'];
 $sql = "SELECT * FROM users WHERE id = '$user_id'";
 $result = mysqli_query($conn, $sql);
@@ -93,6 +90,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   
     <span>Leave blank to keep the existing password.</span>
     <br>
+    <br>
+
   <label>
     Role:
     </label>
@@ -105,8 +104,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <br>
 
+    <br>
+
   <button type="submit">Update User</button>
 </form>
+<a href="dashboard.php"><button>Back to Dashboard</button></a>
 
 
 <?php

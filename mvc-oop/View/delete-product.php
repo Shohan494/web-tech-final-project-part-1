@@ -15,13 +15,11 @@ $user_role = $_SESSION['logged_in_user']['role'];
     $conn = $db->getConnection();
 
 
-// check if user is authorized to access this page (e.g. check user role)
 if($_SESSION['logged_in_user']['role'] !== 'admin') {
   header("Location: unauthorized.php");
   exit;
 }
 
-// check if ID parameter is present in URL
 if(!isset($_GET['id'])) {
   header("Location: products-management.php");
   exit;
@@ -30,7 +28,6 @@ if(!isset($_GET['id'])) {
 $id = $_GET['id'];
 $messages = array();
 
-// delete user from database
 $sql = "DELETE FROM products WHERE product_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);

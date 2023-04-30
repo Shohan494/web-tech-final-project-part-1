@@ -18,10 +18,11 @@ include '../DatabaseConnection.php';
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
-if($_SESSION['logged_in_user']['role'] !== 'admin') {
+if ($user_role !== 'admin' && $user_role !== 'salesman') {
   header("Location: unauthorized.php");
   exit;
 }
+
 
 if(isset($_GET['order_id']) && !empty($_GET['order_id'])) {
   $order_id = $_GET['order_id'];
@@ -48,6 +49,11 @@ WHERE od.order_id = '$order_id'";
       $order_details[] = $row;
       $total_cost += $row['subtotal'];
     }
+
+    // echo "<pre>";
+    // print_r($order_details);
+    // echo "<pre>";
+    
   }
 } else {
   header("Location: orders.php");
@@ -59,7 +65,9 @@ WHERE od.order_id = '$order_id'";
 
 <h2>Order ID: <?php echo $order_id; ?></h2>
 
-<h2>Customer Email: <?php isset($order_details[0]['email'])? $order_details[0]['email']: ""; ?></h2>
+<?php if(isset($order_details[0])) : ?>
+<h2>Customer Email: <?php echo $order_details[0]['email']; ?></h2>
+<?php endif;?>
 
 <h3>Products List:</h3>
 

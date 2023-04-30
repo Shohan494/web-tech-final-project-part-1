@@ -11,9 +11,9 @@ $user_role = $_SESSION['logged_in_user']['role'];
     include_once "navigation-menu.php";
 ?>
 
-
-
 <?php
+
+print_r($user_role);
 
 
 include '../DatabaseConnection.php';
@@ -21,14 +21,13 @@ include '../DatabaseConnection.php';
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
-if($_SESSION['logged_in_user']['role'] !== 'admin') {
+if ($user_role !== 'admin' && $user_role !== 'salesman') {
   header("Location: unauthorized.php");
   exit;
 }
 
-$user_email = $_SESSION['logged_in_user']['username'];
 
-$user_role = $_SESSION['logged_in_user']['role'];
+$user_email = $_SESSION['logged_in_user']['username'];
 
 $sql = "SELECT o.order_id, o.order_date, o.total_cost, c.email
         FROM orders AS o
@@ -49,7 +48,7 @@ if(mysqli_num_rows($result) > 0) {
 
 
 <a href="create-order.php"><button class="btn btn-success">Create New Order</button></a>
-
+<a href="dashboard.php"><button class="btn btn-success">Back to Dashboard</button></a>
 
 <br>
 <br>

@@ -19,14 +19,12 @@ include '../DatabaseConnection.php';
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
-// Check if the user is logged in and has admin role
-if (!isset($_SESSION['logged_in_user']) || $_SESSION['logged_in_user']['role'] !== 'admin') {
+if ($user_role !== 'admin') {
     header("Location: unauthorized.php");
     exit;
-}
+  }
 
 
-// Get all the users from the database
 $sql = "SELECT id, username, email, role FROM users";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -34,12 +32,9 @@ $result = $stmt->get_result();
 $users = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>User List</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    
     <script>
     $(document).ready(function() {
       // Handle delete button click events
@@ -65,9 +60,13 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
 </head>
 
 <body>
-    <h1>User List</h1>
+    <h1>Users Management Ajax Delete</h1>
 
-    <a href="create-user.php">Create New User</a>
+    <a href="create-user.php"><button>Create New User</button></a>
+    <a href="dashboard.php"><button>Back to Dashboard</button></a>
+
+    <br>
+    <br>
 
     <table border="1">
         <thead>
@@ -87,7 +86,7 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
                     <td><?php echo $user['username']; ?></td>
                     <td><?php echo $user['email']; ?></td>
                     <td><?php echo $user['role']; ?></td>
-                    <td><a href="edit-user.php?id=<?php echo $user['id']; ?>">Edit</a></td>
+                    <td><a href="edit-user.php?id=<?php echo $user['id']; ?>"><button>Edit</button></a></td>
                     <td><button class='delete-user' data-user-id=<?php echo $user["id"]; ?>>Delete</button></td>
                 </tr>
             <?php endforeach; ?>

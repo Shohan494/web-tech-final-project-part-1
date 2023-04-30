@@ -14,7 +14,7 @@ class DatabaseConnection {
       die("Connection failed: " . $this->conn->connect_error);
     }
     else{
-      echo("Connection Done!");
+      // echo("Connection Done!");
     }
   }
 

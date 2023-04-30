@@ -7,6 +7,8 @@ $conn = $db->getConnection();
 
 session_start();
 
+$messages = array();
+
 $user_id = $_SESSION['logged_in_user']['id'];
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {

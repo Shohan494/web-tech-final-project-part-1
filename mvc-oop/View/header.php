@@ -8,6 +8,7 @@
     <title>Fuel Distribution Management</title>
     <link rel="icon" type="image/png" sizes="32x32" href="../Assets/oil-station.png">
     <link rel="stylesheet" href="../Assets/css/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>

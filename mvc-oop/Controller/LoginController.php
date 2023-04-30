@@ -49,15 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         setcookie("user_login", $_SESSION['logged_in_user']['username'], $cookie_expiration_time, '/');
 
+        // print_r($_SESSION['logged_in_user']);
 
-        print_r(time());
-        echo "<br>";
-        print_r(time() + 60);
-        echo "<br>";
+        // print_r(time());
+        // echo "<br>";
+        // print_r(time() + 60);
+        // echo "<br>";
 
-        print_r($_COOKIE['user_login']);
-        echo "<br>";
-        print_r($_SESSION['logged_in_user']['username']);
+        // print_r($_COOKIE['user_login']);
+        // echo "<br>";
+        // print_r($_SESSION['logged_in_user']['username']);
 
 
         header("Location: ../View/dashboard.php");

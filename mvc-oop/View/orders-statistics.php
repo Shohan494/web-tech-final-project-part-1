@@ -14,6 +14,12 @@ include '../DatabaseConnection.php';
 $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
+if ($user_role !== 'admin' && $user_role !== 'salesman') {
+    header("Location: unauthorized.php");
+    exit;
+  }
+  
+
 $sql = "SELECT DATE_FORMAT(order_date, '%Y-%m') as order_month, COUNT(*) as num_orders, SUM(total_cost) as total_cost FROM orders GROUP BY order_month ORDER BY order_month ASC";
 
 $result = mysqli_query($conn, $sql);

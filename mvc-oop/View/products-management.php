@@ -52,13 +52,11 @@ if(mysqli_num_rows($result) > 0) {
     <?php unset($_SESSION['messages']); ?>
   <?php endif; ?>
 
-<h2>[ WOULD BE BETTER TO ADD QUANTITY AND BASIC CALCULATION  FOR EACH ORDER ]</h2>
-
-<button class="btn btn-success"><a href="add-product-form.php">Add Product</a></button>
-
 <a href="add-product-form.php"><button class="btn btn-success">Add Product</button></a>
+<a href="dashboard.php"><button>Back to Dashboard</button></a>
 
 
+<br>
 <br>
 
 <table border="1">
@@ -81,10 +79,10 @@ if(mysqli_num_rows($result) > 0) {
         <td><?php echo $product['description']; ?></td>
         <td><?php echo $product['price']; ?></td>
         <td>
-          <button><a href="edit-product.php?id=<?php echo $product['product_id']; ?>">Edit</a></button>
+          <a href="edit-product.php?id=<?php echo $product['product_id']; ?>"><button>Edit</button></a>
         </td>
         <td>
-          <button><a href="delete-product.php?id=<?php echo $product['product_id']; ?>">Delete</a></button>
+          <a href="delete-product.php?id=<?php echo $product['product_id']; ?>"><button>Delete</button></a>
         </td>
       </tr>
     <?php endforeach; ?>

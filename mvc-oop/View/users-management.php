@@ -7,8 +7,8 @@ $user_role = $_SESSION['logged_in_user']['role'];
 ?>
 
 <?php
-    include_once "header.php";
-    include_once "navigation-menu.php";
+include_once "header.php";
+include_once "navigation-menu.php";
 ?>
 
 <?php
@@ -19,26 +19,21 @@ $db = new DatabaseConnection();
 $conn = $db->getConnection();
 
 // check if user is authorized to access this page (e.g. check user role)
-if($_SESSION['logged_in_user']['role'] !== 'admin') {
+if ($_SESSION['logged_in_user']['role'] !== 'admin') {
   header("Location: unauthorized.php");
   exit;
 }
 
 $user_email = $_SESSION['logged_in_user']['username'];
-
-// if role admin
-// customer, salesman crud
-
 $user_role = $_SESSION['logged_in_user']['role'];
 
-// retrieve user data from database
-// you would replace this with your own database code
+
 
 $sql = "SELECT * FROM users";
 $result = mysqli_query($conn, $sql);
 $users = array();
-if(mysqli_num_rows($result) > 0) {
-  while($row = mysqli_fetch_assoc($result)) {
+if (mysqli_num_rows($result) > 0) {
+  while ($row = mysqli_fetch_assoc($result)) {
     $users[] = $row;
   }
 }
@@ -47,18 +42,22 @@ if(mysqli_num_rows($result) > 0) {
 
 <h1>Users Management</h1>
 
-<?php if(isset($_SESSION['messages'])): ?>
-      <?php foreach($_SESSION['messages'] as $message): ?>
-        <center><p><?php echo $message; ?></p></center>
-      <?php endforeach; ?>
-      <?php unset($_SESSION['messages']); ?>
-    <?php endif; ?>
+<?php if (isset($_SESSION['messages'])) : ?>
+  <?php foreach ($_SESSION['messages'] as $message) : ?>
+    <center>
+      <p><?php echo $message; ?></p>
+    </center>
+  <?php endforeach; ?>
+  <?php unset($_SESSION['messages']); ?>
+<?php endif; ?>
 
 
 
-<button class="btn btn-success"><a href="add-user-form.php">Add User</a></button>
+<a href="add-user-form.php"><button>Create New User</button></a>
+<a href="dashboard.php"><button>Back to Dashboard</button></a>
 
 
+<br>
 
 <br>
 
@@ -66,29 +65,28 @@ if(mysqli_num_rows($result) > 0) {
   <thead>
     <tr>
       <th>ID</th>
-      <th>Name</th>
+      <th>Username</th>
       <th>Email</th>
       <th>Role</th>
-      <th>Edit User
+      <th>Edit
       </th>
-      <th>Delete User</th>
+      <th>Delete</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach($users as $user): ?>
+    <?php foreach ($users as $user) : ?>
       <tr>
         <td><?php echo $user['id']; ?></td>
         <td><?php echo $user['username']; ?></td>
         <td><?php echo $user['email']; ?></td>
         <td><?php echo $user['role']; ?></td>
         <td>
-          <button><a href="edit-user.php?id=<?php echo $user['id']; ?>">Edit</a></button>
+          <a href="edit-user.php?id=<?php echo $user['id']; ?>"><button>Edit</button></a>
         </td>
         <td>
-        <button><a href="../Controller/DeleteUserController.php?id=<?php echo $user['id']; ?>">Delete</a></button>
+          <a href="../Controller/DeleteUserController.php?id=<?php echo $user['id']; ?>"><button>Delete</button></a>
         </td>
       </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
-
